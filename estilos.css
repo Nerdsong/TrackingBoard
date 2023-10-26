@@ -1,0 +1,288 @@
+html {
+    font-size: 14px;
+  }
+  
+  * {
+    font-size: 80%;
+  }
+
+h3{
+  color: aliceblue;
+  text-align: center;
+  
+}
+
+
+body{
+    margin: 0.5rem;
+    background-color: rgb(56, 55, 55);
+    font-family: 'Ubuntu', sans-serif;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 500px;
+}
+
+#data_entry{
+    margin-top: 2rem!important;
+    height: 3.5rem!important;
+    background-color: black;
+    margin-bottom: 0rem!important;
+
+}
+
+.col{
+    margin-left: 0.1rem!important;
+}
+
+.container{
+    margin: 0.5rem;
+    max-width: 1000rem!important;
+    margin-bottom: 4rem!important;
+}
+
+#contenido{
+    margin-top: 1rem;
+}
+
+.card{
+    max-width: 170px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: medium!important;
+    margin: 5px 5px 5px 5px;
+    padding: 2px 2px 2px 2px;
+    border: 0px;
+}
+
+.Assigned{
+  background-color:  #4fbce7;
+}
+
+.Accepted{
+  background-color: #e8eb5ff6;
+}
+
+.Traveling{
+  background-color: #fd86f7fd;
+}
+
+.Working{
+  background-color: #42a32ffd;
+}
+
+.comentario-servicio-Assigned{
+  background-color:  #98c6d8fd
+}
+
+.comentario-servicio-Accepted{
+  background-color: #d7d8aaf6;
+}
+
+.comentario-servicio-Traveling{
+  background-color: #dba0d8fd;
+}
+
+.comentario-servicio-Working{
+  background-color: #8ac07ffd;
+}
+
+#comentario{
+  box-shadow: inset 0px 0px 2px 1px #555;
+  border-radius: 3px 3px 3px 3px ;
+  height: 35px;
+  overflow: hidden;
+  font-size: 11 px;
+}
+
+.input-comentario{
+  box-shadow: inset 0px 0px 2px 1px #555;
+  border-radius: 3px 3px 3px 3px ;
+  height: 35px;
+  width: 130px;
+  overflow: hidden;
+  font-size: 10px;
+}
+
+.numeros_de_servicio{
+  font-size: smaller;
+  background-color: #99999938;
+  border-radius: 3px 3px 3px 3px;
+}
+.nombre_del_sitio{
+  font-weight: bolder;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+}
+
+.contenedor_atm_direccion{
+  text-align: start;
+  max-width: auto;
+  height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.numero_de_atm{
+  display: inline;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.direccion_atm{
+  display: inline;
+  font-size: 10px;
+
+}
+
+.tipo_servicio{
+  text-align: left;
+  font-weight: bold;
+}
+
+.severidad_servicio{
+  text-align: right;
+  font-weight: bold;
+}
+
+.card-tecnico{
+  width: 150px;
+  height: 150px;
+  margin: 2px 2px 2px 2px ;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: medium!important;
+  border-radius: 5%;
+  align-self: center;
+}
+
+.row{
+  justify-content: start;
+  align-content: center;
+}
+
+
+.card-info{
+  margin-left: 4px ;
+  max-width: 130px;
+}
+
+.card-buttons-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   margin: 4px;  
+}
+
+.boton-tarjeta{
+   padding: 4px;
+   border: none;
+   border-radius: 20%;
+   box-shadow:  0px 1px 2px 0.2px rgb(87, 87, 87);
+}
+
+.boton-tarjeta-coment{
+   padding: 4px;
+   border: none;
+   border-radius: 20%;
+   box-shadow:  0px 1px 2px 0.2px rgb(87, 87, 87);
+}
+
+.boton-tarjeta-urgent{
+  padding: 4px;
+  border: none;
+  border-radius: 20%;
+  box-shadow:  0px 1px 2px 0.2px rgb(87, 87, 87);
+}
+
+.pendiente{
+  background-color: rgb(184, 102, 102);
+}
+
+.confirmada{
+  background-color: #79d163b6;
+}
+
+.tarjeta-pendiente{
+  box-shadow: inset 0px 4px 12px 4px rgb(177, 54, 54);
+}
+
+.tarjeta-confirmada{
+  box-shadow: inset 0px 4px 12px 4px rgb(108, 228, 60);
+}
+
+.icono-tarjeta{
+   max-width:15px;
+}
+
+.dropzone.dragover{
+    border: 5px greenyellow;
+}
+
+.dropzone.dragend {
+    border: 2px dashed rgb(128, 128, 128);
+}
+
+.dropzone {
+    border: 2px dashed gray;
+    font-size: medium;
+    font-weight: bold;
+    width: 30rem;
+    height: 3rem;
+}
+
+.dropzone.drop{
+    background-color: chartreuse;
+}
+
+
+#ir-arriba {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
+
+  .horario_1{
+    background-color: rgb(0, 162, 255);
+  }
+
+  .horario_2{
+    background-color: rgb(240, 189, 22);
+  }
+
+  .horario_3{
+    background-color: rgb(42, 168, 99);
+  }
+
+  .horario_4{
+    background-color: rgb(125, 10, 136);
+  }
+
+  .horario_5{
+    background-color: rgb(238, 189, 154);
+  }
+
+  .horario_6{
+    background-color: rgb(171, 255, 37);
+  }
+
+  .no_disponible{
+    background-color: rgb(121, 46, 61)!important;
+  }
