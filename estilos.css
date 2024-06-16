@@ -143,6 +143,7 @@ body{
 .tipo_servicio{
   text-align: left;
   font-weight: bold;
+  text-wrap: nowrap;
 }
 
 .severidad_servicio{
@@ -199,6 +200,8 @@ body{
    border: none;
    border-radius: 20%;
    box-shadow:  0px 1px 2px 0.2px rgb(87, 87, 87);
+   margin-bottom: 4px;
+   margin-left: 2px;
 }
 
 .boton-tarjeta-urgent{
@@ -311,6 +314,17 @@ body{
     background-color: rgb(121, 46, 61)!important;
   }
 
+  .card-bottom-box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .service-info{
+    flex-grow: 1;
+    font-size: 15px;
+  }
+  
   .card.hiding-card{
     transform: scaleX(0.2);
     min-height: 100px;
@@ -323,13 +337,4 @@ body{
     display: none;
   }
 
-  .card-bottom-box{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  }
-
-  .service-info{
-    flex-grow: 1;
-    font-size: 15px;
-  }
+  

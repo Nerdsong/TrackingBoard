@@ -73,9 +73,9 @@ const manejadorDeEventos = {
             // Validamos
             if (fecha === diaHoy) {
                 
-                node.parentElement.parentElement.classList.add("hiding-card");
+                node.parentElement.parentElement.parentElement.parentElement.classList.add("hiding-card");
                 setTimeout(() => {
-                    node.parentElement.classList.add("hiden-text")
+                    node.parentElement.parentElement.parentElement.classList.add("hiden-text")
                 }, 300);
             } 
             else {
@@ -96,9 +96,9 @@ const manejadorDeEventos = {
             const diaHoy = `${(hoy.getMonth()+1).toString().padStart(2,'0')}/${hoy.getDate().toString().padStart(2,'0')}/${hoy.getFullYear()}`;
             // Validamos
             if (fecha === diaHoy) {
-                node.parentElement.parentElement.classList.remove("hiding-card");
+                node.parentElement.parentElement.parentElement.parentElement.classList.remove("hiding-card");
                 setTimeout(() => {
-                     node.parentElement.classList.remove("hiden-text")
+                     node.parentElement.parentElement.parentElement.classList.remove("hiden-text")
                 }, 300);
                 
             } 
