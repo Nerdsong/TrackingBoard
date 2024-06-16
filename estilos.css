@@ -179,6 +179,7 @@ body{
 .card-info{
   margin: 4px ;
   max-width: 170px;
+  min-width: 157px;
 }
 
 .card-buttons-container{
@@ -228,7 +229,7 @@ body{
 }
 
 .tarjeta-alternativa{
-  box-shadow: inset 0px 4px 12px 4px rgb(4, 176, 255);
+  box-shadow: inset 0px 4px 12px 4px rgb(123, 255, 233);
 }
 
 .icono-tarjeta{
@@ -324,7 +325,7 @@ body{
     flex-grow: 1;
     font-size: 15px;
   }
-  
+
   .card.hiding-card{
     transform: scaleX(0.2);
     min-height: 100px;
