@@ -221,15 +221,18 @@ body{
 }
 
 .tarjeta-pendiente{
-  box-shadow: inset 0px 4px 12px 4px rgb(177, 54, 54);
+  box-shadow: inset 0px 0px 0px 5px rgb(177, 54, 54);
+  border: rgb(177, 54, 54);
 }
 
 .tarjeta-confirmada{
-  box-shadow: inset 0px 4px 12px 4px rgb(108, 228, 60);
+  box-shadow: inset 0px 0px 0px 5px rgb(108, 228, 60);
+  border: rgb(108, 228, 60);
 }
 
 .tarjeta-alternativa{
-  box-shadow: inset 0px 4px 12px 4px rgb(123, 255, 233);
+  box-shadow: inset 0px 0px 0px 5px rgb(123, 255, 233);
+  border: rgb(123, 255, 233);
 }
 
 .icono-tarjeta{
