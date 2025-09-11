@@ -48,8 +48,8 @@ const GeneradorTarjetasTecnicos = {
                 dispo_tecnico="";
             }
             document.querySelector("#contenido").innerHTML += `
-            <div class="row row-cols-1" id="${GeneradorTarjetasTecnicos.tarjetasTecnicosGeneradas[i].legajoTecnico}"> 
-                <div class="card-tecnico text-bg-dark ${dispo_tecnico} mb-3">
+            <div class="row " id="${GeneradorTarjetasTecnicos.tarjetasTecnicosGeneradas[i].legajoTecnico}"> 
+                <div class="card-tecnico text-bg-dark ${dispo_tecnico} ">
                     <div class="card-body">
                         <h6 class="card-title">${GeneradorTarjetasTecnicos.tarjetasTecnicosGeneradas[i].nombre}</h6><br>
                         <h6 class="card-title">${GeneradorTarjetasTecnicos.tarjetasTecnicosGeneradas[i].legajoTecnico}</h6></br>

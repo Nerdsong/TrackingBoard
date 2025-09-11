@@ -28,7 +28,6 @@ body{
     height: 3.5rem!important;
     background-color: black;
     margin-bottom: 0rem!important;
-
 }
 
 .col{
@@ -47,13 +46,15 @@ body{
 
 .card{
     max-width: 170px;
+    min-width: 170px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: medium!important;
+    font-size: large!important;
     margin: 5px 5px 5px 5px;
-    padding: 2px 2px 2px 2px;
+    padding: 2px 4px 2px 4px;
     border: 0px;
+    transition: all 0.5s ease;
 }
 
 .Assigned{
@@ -106,7 +107,6 @@ body{
 }
 
 .numeros_de_servicio{
-  font-size: smaller;
   background-color: #99999938;
   border-radius: 3px 3px 3px 3px;
 }
@@ -122,7 +122,7 @@ body{
 .contenedor_atm_direccion{
   text-align: start;
   max-width: auto;
-  height: 30px;
+  height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -150,28 +150,34 @@ body{
   font-weight: bold;
 }
 
-.card-tecnico{
+.card-tecnico {
   width: 150px;
   height: 150px;
-  margin: 2px 2px 2px 2px ;
+  min-width: 150px; 
+  min-height: 210px;
+  margin: 2px ;
   padding: 2px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-size: medium!important;
+  align-items: center; /* centra el contenido */
+  font-size: medium !important;
   border-radius: 5%;
   align-self: center;
+  overflow: hidden; /* recorta lo que se salga */
 }
 
 .row{
   justify-content: start;
   align-content: center;
+  align-items: center;
+  transition: all 1s ease!important;
 }
 
 
 .card-info{
-  margin-left: 4px ;
-  max-width: 130px;
+  margin: 4px ;
+  max-width: 170px;
 }
 
 .card-buttons-container{
@@ -236,12 +242,26 @@ body{
     font-weight: bold;
     width: 30rem;
     height: 3rem;
+    background-color: white;
+    transition: background-color 0.5s ease; 
 }
 
 .dropzone.drop{
     background-color: chartreuse;
 }
 
+.dropzone.over-drop{
+  background-color: white;
+}
+.checkbox-main{
+    color: white;
+    font-size: large;
+    cursor: pointer;
+    background-color: #555;
+    margin: 0px 0px 10px 20px;
+    padding: 4px;
+    border-radius: 4px;
+  }
 
 #ir-arriba {
     display: none;
@@ -285,4 +305,16 @@ body{
 
   .no_disponible{
     background-color: rgb(121, 46, 61)!important;
+  }
+
+  .card.hiding-card{
+    transform: scaleX(0.2);
+    min-height: 100px;
+    min-width: 2px;
+    width: 2px;
+    
+  }
+
+  .hiden-text{
+    display: none;
   }

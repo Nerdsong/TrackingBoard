@@ -10,6 +10,7 @@ const manejadorDeEventos = {
         e.preventDefault();
         
         e.target.classList.add("drop");
+        e.target.classList.remove("over-drop");
       
         const f = e.dataTransfer.files[0]; 
         const data = await f.arrayBuffer(); 
@@ -28,6 +29,7 @@ const manejadorDeEventos = {
         e.preventDefault();
         
         e.target.classList.add("drop");
+        e.target.classList.remove("over-drop");
       
         const f = e.dataTransfer.files[0]; 
         const data = await f.arrayBuffer(); 
@@ -42,6 +44,69 @@ const manejadorDeEventos = {
         ejecutarLecturaYProcesoDeDatos(manejadorDeEventos.datosCSV_1, manejadorDeEventos.datosCSV_2);
     },
     
+    handleDragEnter: async (e)=>{
+        e.stopPropagation();
+        e.preventDefault();
+
+        e.target.classList.add("over-drop");
+    }
+    ,
+    handleDragLeave: async (e)=>{
+        e.stopPropagation();
+        e.preventDefault();
+
+        e.target.classList.remove("over-drop");
+    }
+    ,
+
+    handleCheckBox_checked: async (e) =>{
+        console.log("worked")
+        let dateNodeList = document.querySelectorAll('[name="schedule-start-DOM"]');
+        dateNodeList.forEach(node => {
+            // Obtenemos el texto y removemos espacios extra
+            const texto = node.textContent.trim();
+            // Separamos la fecha de la hora usando la coma
+            const [fecha, hora] = texto.split(","); // fecha = "06/17/2024", hora = " 14:00"
+            // Comparamos con "hoy"
+            const hoy = new Date();
+            const diaHoy = `${(hoy.getMonth()+1).toString().padStart(2,'0')}/${hoy.getDate().toString().padStart(2,'0')}/${hoy.getFullYear()}`;
+            // Validamos
+            if (fecha === diaHoy) {
+                
+                node.parentElement.parentElement.classList.add("hiding-card");
+                setTimeout(() => {
+                    node.parentElement.classList.add("hiden-text")
+                }, 300);
+            } 
+            else {
+            }       
+        });
+    }
+    ,
+    handleCheckBox_unChecked: async (e) =>{
+        console.log("worked2")
+        let dateNodeList = document.querySelectorAll('[name="schedule-start-DOM"]');
+        dateNodeList.forEach(node => {
+            // Obtenemos el texto y removemos espacios extra
+            const texto = node.textContent.trim();
+            // Separamos la fecha de la hora usando la coma
+            const [fecha, hora] = texto.split(","); // fecha = "06/17/2024", hora = " 14:00"
+            // Comparamos con "hoy"
+            const hoy = new Date();
+            const diaHoy = `${(hoy.getMonth()+1).toString().padStart(2,'0')}/${hoy.getDate().toString().padStart(2,'0')}/${hoy.getFullYear()}`;
+            // Validamos
+            if (fecha === diaHoy) {
+                node.parentElement.parentElement.classList.remove("hiding-card");
+                setTimeout(() => {
+                     node.parentElement.classList.remove("hiden-text")
+                }, 300);
+                
+            } 
+            else {
+            }       
+        });
+    }
+    ,
     async clickEnBotonDeTarjeta(evento){
         if(evento.target.closest("button") != null){
             let numeroDeServicio = evento.target.closest(".card").id;
@@ -103,6 +168,7 @@ const manejadorDeEventos = {
         }
         else{}
     }
+    
 }
 
 //revisar como manejar eventos con async y await para que la funcion que ejecuta el código a partir de los datos preparados no deba incluirse en ninguna de estas funciones sino que sea independiente. 

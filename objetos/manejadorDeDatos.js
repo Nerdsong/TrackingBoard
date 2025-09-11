@@ -57,9 +57,6 @@ const manejadorDeDatos = {
                     
                     manejadorDeDatos.nuevos[indexNuevo].setComentario(comentario);
                     manejadorDeDatos.nuevos[indexNuevo].setEstadoDeTarjeta(estadoTarjeta);
-                    console.log(manejadorDeDatos.nuevos[indexNuevo]);
-                    console.log("se ha añadido el comentario " + comentario)
-                    console.log("se añade status tarjeta " + estadoTarjeta)
                 } 
                 //si el elemento del array "actuales" no existe en el array "nuevos", lo elimina del array "actuales" y lo guarda en una array "finalizados"
                 else{
@@ -72,7 +69,6 @@ const manejadorDeDatos = {
             };
             // luego toma los elementos del array "nuevos" que no se eliminaron porque no estaban en el array "actuales" y los incluye a "actuales"
             manejadorDeDatos.setActuales(manejadorDeDatos.getNuevos());
-            console.log(manejadorDeDatos.getActuales())
         }
         
     } 

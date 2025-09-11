@@ -16,9 +16,6 @@ function escrituraTarjeta(status,numeroDeSR,numeroDeTask,serviceTag,nombreDelSit
                     ${direccion}
                 </div>
             </div>
-            <div id="comentario" class= "comentario-servicio-${status}">
-                ${comentario}
-            </div>
             <div class= "tipo_servicio">
                 ${tipoDeServicio}    
             </div>
@@ -28,28 +25,28 @@ function escrituraTarjeta(status,numeroDeSR,numeroDeTask,serviceTag,nombreDelSit
             <div class= "">
                 ${requestedBy}
             </div>
-            <div class= "">
+            <div class= "" name="schedule-start-DOM">
                 ${scheduleStart}
             </div>
         </div>
-        <div class="card-buttons-container">
+</div>`;
+
+
+
+/*-
+    <div class="card-buttons-container">
         
-            <button class="boton-tarjeta ${status}">
-                <img class="icono-tarjeta"  src="iconos/expand.png" alt="IconoDeExpandir">
-            </button>
             <button class="boton-tarjeta-coment ${status}">
                 <img class="icono-tarjeta" src="iconos/coment.png" alt="IconoDeComentar">
             </button>
-            <button class="boton-tarjeta ${status} ">
-                <img class="icono-tarjeta"  src="iconos/copy.png" alt="IconoDeCopiar">
-            </button>
+        
             <button class="boton-tarjeta-urgent ${status}">
                 <img class="icono-tarjeta"  src="iconos/urgent.png" alt="IconoDePendiente">
             </button>
         
     </div>
-</div>`;
 
+*/
 return tarjetaHTML;
 }
 

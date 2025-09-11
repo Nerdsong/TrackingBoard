@@ -108,7 +108,6 @@ class Servicio{
 
     setScheduleStart(fechaHora){
         this.#scheduleStart = fechaHora;
-        console.log(fechaHora)
     }
 
     //Acá se toman los datos provenientes de un objeto "fecha" y se pasan a string con la diferencia de que si el campo está vacio se sustituye con "----vacio---".

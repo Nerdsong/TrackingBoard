@@ -6,20 +6,19 @@ const GeneradorDeServicios = {
     //este metodo sólo ubica el index en el que se encuentra determinada columna y retorna la posición.
 
     ubicarColumnaDe( nombreDeColumna, matrizDeDatos){
-        let ubicacion = "noExiste";
+        let ubicacion =0 ;
         let ultimaFila = (matrizDeDatos.length) - 1 ; // este dato es util porque al ordenar la matriz por fecha, la fila que contiene los titulos de las columnas queda de ultima. 
 
         for(ubicacion=0; ubicacion < matrizDeDatos[0].length;ubicacion ++ ){
             if(nombreDeColumna == matrizDeDatos[0][ubicacion]){
-                console.log(ubicacion);
-                return ubicacion
+                return ubicacion;
             }
             else if(nombreDeColumna == matrizDeDatos[ultimaFila][ubicacion]){
-                return ubicacion
+                return ubicacion;
             }
-            else {};
+            else {}
         };
-        return  ubicacion; 
+        return null; 
     },
 
     //este comportamiento debería ordenar la matriz basándose en la fecha de la columna Schedule start luego de convertir las fechas en objetos "fecha"
@@ -28,43 +27,47 @@ const GeneradorDeServicios = {
 
         let columnaFechaYHoraSinSeparar = GeneradorDeServicios.ubicarColumnaDe("Schedule Start",matrizDatos);
 
-        GeneradorDeServicios.convertirColumnaDeFechaYHoraEnObjetoFecha(matrizDatos,"Schedule Start");
-        GeneradorDeServicios.convertirColumnaDeFechaYHoraEnObjetoFecha(matrizDatos,"Requested By"); //convertimos la columna ReqBy en objeto fecha por cuestiones de estetica. 
+        if(columnaFechaYHoraSinSeparar != null){
+            GeneradorDeServicios.convertirColumnaDeFechaYHoraEnObjetoFecha(matrizDatos,"Schedule Start");
+            GeneradorDeServicios.convertirColumnaDeFechaYHoraEnObjetoFecha(matrizDatos,"Requested By"); //convertimos la columna ReqBy en objeto fecha por cuestiones de estetica. 
 
-        function mergeSort(arr) {
-            if (arr.length <= 1) {
-              return arr;
+            function mergeSort(arr) {
+                if (arr.length <= 1) {
+                return arr;
+                }
+            
+                const mitad = Math.floor(arr.length / 2);
+                const izquierda = arr.slice(0, mitad);
+                const derecha = arr.slice(mitad);
+            
+                return merge(mergeSort(izquierda), mergeSort(derecha));
             }
-          
-            const mitad = Math.floor(arr.length / 2);
-            const izquierda = arr.slice(0, mitad);
-            const derecha = arr.slice(mitad);
-          
-            return merge(mergeSort(izquierda), mergeSort(derecha));
+            
+            function merge(izquierda, derecha) {
+                let resultado = [];
+                let izquierdaIndex = 0;
+                let derechaIndex = 0;
+            
+                while (izquierdaIndex < izquierda.length && derechaIndex < derecha.length) {
+                if (izquierda[izquierdaIndex][columnaFechaYHoraSinSeparar] < derecha[derechaIndex][columnaFechaYHoraSinSeparar]) {
+                    resultado.push(izquierda[izquierdaIndex]);
+                    izquierdaIndex++;
+                } else {
+                    resultado.push(derecha[derechaIndex]);
+                    derechaIndex++;
+                }
+                }
+            
+                return resultado.concat(izquierda.slice(izquierdaIndex)).concat(derecha.slice(derechaIndex));
+            }
+
+            const MATRIZ_ORDENADA = mergeSort(matrizDatos);
+            
+            return MATRIZ_ORDENADA;
         }
-          
-        function merge(izquierda, derecha) {
-            let resultado = [];
-            let izquierdaIndex = 0;
-            let derechaIndex = 0;
-          
-            while (izquierdaIndex < izquierda.length && derechaIndex < derecha.length) {
-              if (izquierda[izquierdaIndex][columnaFechaYHoraSinSeparar] < derecha[derechaIndex][columnaFechaYHoraSinSeparar]) {
-                resultado.push(izquierda[izquierdaIndex]);
-                izquierdaIndex++;
-              } else {
-                resultado.push(derecha[derechaIndex]);
-                derechaIndex++;
-              }
-            }
-          
-            return resultado.concat(izquierda.slice(izquierdaIndex)).concat(derecha.slice(derechaIndex));
-          }
-
-        const MATRIZ_ORDENADA = mergeSort(matrizDatos);
-        
-        return MATRIZ_ORDENADA;
-
+        else{
+            alert("La Columna 'Schedule Start' no esta en el reporte");
+        }
     },
 
     //este metodo sólo convierte la string en un objeto "fecha"
@@ -104,9 +107,27 @@ const GeneradorDeServicios = {
     leerYGenerarServicios(matrizDatos){
 
         let matrizOrdenada = GeneradorDeServicios.odernarMatrizPorFecha(matrizDatos);
-        console.log(matrizOrdenada);
 
         let i = 0;
+
+        let columnName = ["CE Code","SR#","TASK#","Site Name","Address","SR Type","Severity","Schedule Start","Requested By","Status","Service Tag"]
+        let columnNotFound = [];
+
+        columnName.forEach(column => {
+            if(GeneradorDeServicios.ubicarColumnaDe(column,matrizOrdenada) == null){
+                columnNotFound.push(column);
+            }
+            else{};
+        });
+
+        if(columnNotFound.length > 0){
+            let columnString = "";
+            columnNotFound.forEach(column =>{
+                columnString += column + "❌"
+            })
+            alert(`\n🛠️Las columnas: ${columnString} \nNo fueron encontradas en el reporte, deberás incluirlas o resetear el perfil.\n\n⚠️Si ya estaban incluidas en tu perfil, hay que ir a preferencias para editar el perfil, marcar y desmarcar uno de los territorios incluidos con "ctrl + click", luego guardar y refresh ♻️.\n\nPor error el ECM algunas veces exporta el reporte sin incluir todas las columnas☠️☠️`)
+        }
+
         for( i = 0 ; i < matrizOrdenada.length; i++ ){
             GeneradorDeServicios.serviciosGenerados[i] = new Servicio ();
             GeneradorDeServicios.serviciosGenerados[i].setLegajoServicio(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"CE Code"));
@@ -127,15 +148,9 @@ const GeneradorDeServicios = {
 
     verificarSiColumnaExisteYDevolverInfo(matriz, iterador, columnaABuscar){
         let columnaAuxiliar =  GeneradorDeServicios.ubicarColumnaDe(columnaABuscar,matriz);
-        let mensajeDecolumnaNoEncontrada = "Añadir columna al perfil de ECM";
 
-        if(columnaAuxiliar!= "noExiste" ){
             return matriz[iterador][columnaAuxiliar];
-        }
-        else{
-            console.log(mensajeDecolumnaNoEncontrada)
-            return mensajeDecolumnaNoEncontrada;
-        }
+
     }
 }
 
