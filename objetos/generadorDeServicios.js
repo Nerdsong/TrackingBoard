@@ -125,7 +125,7 @@ const GeneradorDeServicios = {
             columnNotFound.forEach(column =>{
                 columnString += column + "❌"
             })
-            alert(`\n🛠️Las columnas: ${columnString} \nNo fueron encontradas en el reporte, deberás incluirlas o resetear el perfil.\n\n⚠️Si ya estaban incluidas en tu perfil, hay que ir a preferencias para editar el perfil, marcar y desmarcar uno de los territorios incluidos con "ctrl + click", luego guardar y refresh ♻️.\n\nPor error el ECM algunas veces exporta el reporte sin incluir todas las columnas☠️☠️`)
+            alert(`\n🛠️Las columnas: ${columnString} \nNo fueron encontradas en el reporte, deberás incluirlas o resetear el perfil del ECM.\n\n⚠️Si ya estaban incluidas en tu perfil, hay que ir a preferencias para editar el perfil, marcar y desmarcar uno de los territorios incluidos con "ctrl + click", luego guardar y refresh ♻️.\n\nPor error el ECM algunas veces exporta el reporte sin incluir todas las columnas☠️☠️`)
         }
 
         for( i = 0 ; i < matrizOrdenada.length; i++ ){
