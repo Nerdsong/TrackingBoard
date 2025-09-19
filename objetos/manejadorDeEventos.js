@@ -132,6 +132,14 @@ const manejadorDeEventos = {
                 input.replaceWith(divComentario);
                 await manejadorDeDatos.actuales[indexDelServicio].setComentario(input.value);
                 console.log("se ha agregado el comentario " + input.value);
+                let comentarioSinEspacios = divComentario.textContent.trim();
+                if(comentarioSinEspacios == "Sin comentarios" || comentarioSinEspacios == "" ){
+                    divComentario.classList.remove("input-comentario-comentado");
+                }
+                else{
+                    divComentario.classList.add("input-comentario-comentado");
+                }
+                
             });
         } 
         else if (evento.target.closest("button").classList.contains("boton-tarjeta-urgent")) {

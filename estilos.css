@@ -104,6 +104,16 @@ body{
   width: 130px;
   overflow: hidden;
   font-size: 10px;
+  background-color: white;
+}
+
+.input-comentario-comentado{
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  border-color: black;
+  border-style: dashed;
+  border-width: 1px;
+  text-align: center;
 }
 
 .numeros_de_servicio{
