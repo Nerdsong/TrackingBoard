@@ -16,37 +16,46 @@ function escrituraTarjeta(status,numeroDeSR,numeroDeTask,serviceTag,nombreDelSit
                     ${direccion}
                 </div>
             </div>
-            <div class= "tipo_servicio">
-                ${tipoDeServicio}    
+             <div id="comentario" class= "comentario-servicio-${status}">
+                ${comentario}
             </div>
-            <div class= "severidad_servicio">
-                ${severidad}
+            <div class= "card-bottom-box">
+                <div class = "service-info">
+                    <div class= "tipo_servicio">
+                    ${tipoDeServicio}    
+                    </div>
+                    <div class= "severidad_servicio">
+                        ${severidad}
+                    </div>
+                    <div class= "">
+                        ${requestedBy}
+                    </div>
+                    <div class= "" name="schedule-start-DOM">
+                        ${scheduleStart}
+                    </div>
+                </div>
+                <div class="card-buttons-container">
+        
+                    <button class="boton-tarjeta-coment ${status}">
+                        <img class="icono-tarjeta" src="iconos/coment.png" alt="IconoDeComentar">
+                    </button>
+                
+                    <button class="boton-tarjeta-urgent ${status}">
+                        <img class="icono-tarjeta"  src="iconos/urgent.png" alt="IconoDePendiente">
+                    </button>
+        
+                </div>
             </div>
-            <div class= "">
-                ${requestedBy}
-            </div>
-            <div class= "" name="schedule-start-DOM">
-                ${scheduleStart}
-            </div>
+            
+            
         </div>
-</div>`;
+
+</div>
 
 
+`;
 
-/*-
-    <div class="card-buttons-container">
-        
-            <button class="boton-tarjeta-coment ${status}">
-                <img class="icono-tarjeta" src="iconos/coment.png" alt="IconoDeComentar">
-            </button>
-        
-            <button class="boton-tarjeta-urgent ${status}">
-                <img class="icono-tarjeta"  src="iconos/urgent.png" alt="IconoDePendiente">
-            </button>
-        
-    </div>
 
-*/
 return tarjetaHTML;
 }
 

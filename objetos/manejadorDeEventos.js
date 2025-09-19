@@ -107,68 +107,58 @@ const manejadorDeEventos = {
         });
     }
     ,
-    async clickEnBotonDeTarjeta(evento){
-        if(evento.target.closest("button") != null){
-            let numeroDeServicio = evento.target.closest(".card").id;
-            let indexDelServicio = manejadorDeDatos.actuales.findIndex( servicio => servicio.getSR() == numeroDeServicio);
-            if(evento.target.closest("button").className.includes("boton-tarjeta-coment") ){
-                
-                let botonComentario = evento.target.closest("button");
-                //rutear el target hacia el elemento "primo"
-                let padreBotonComentario = botonComentario.parentElement;
-                
-                let tioBotonComentario = padreBotonComentario.previousElementSibling
-                
-                let primosBotonComentario = tioBotonComentario.children
-                
-                let divComentario = primosBotonComentario[3] // aca ubico el elemento "primo" donde está la caja de comentarios.
+    async clickEnBotonDeTarjeta(evento) {
+    if (evento.target.closest("button") != null) {
+        let numeroDeServicio = evento.target.closest(".card").id;
+        let indexDelServicio = manejadorDeDatos.actuales.findIndex(
+            servicio => servicio.getSR() == numeroDeServicio
+        );
 
-                let input = document.createElement("input");
-
-                input.classList.add("input-comentario")
-
-                input.value = divComentario.textContent
-          
-                divComentario.replaceWith(input);
-                
-                input.focus();
-
-                input.addEventListener('blur', async () => {
-                    divComentario.textContent = input.value
-                    input.replaceWith(divComentario)
-                    await manejadorDeDatos.actuales[indexDelServicio].setComentario(input.value)
-                    console.log(manejadorDeDatos.actuales[indexDelServicio])
-                    console.log("se ha agregado el comentario " + input.value)
-                })              
-
-            }
-            else if(evento.target.closest("button").className.includes("boton-tarjeta-urgent") ){
+        if (evento.target.closest("button").classList.contains("boton-tarjeta-coment")) {
             
-                let tarjetaContenedora = evento.target.closest(".card");
-                
-                
-                if(tarjetaContenedora.className.includes("tarjeta-pendiente")){
-                    
-                    tarjetaContenedora.classList.remove("tarjeta-pendiente")
-                    tarjetaContenedora.classList.add("tarjeta-confirmada")
+            let tarjeta = evento.target.closest(".card");
+            let divComentario = tarjeta.querySelector("#comentario"); // 🎯 directo al div dentro de la tarjeta
 
-                    await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("tarjeta-confirmada")
-                }
-                else if(tarjetaContenedora.className.includes("tarjeta-confirmada")){
-                    
-                    tarjetaContenedora.classList.remove("tarjeta-confirmada")
-                    await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("")
-                }
-                else{
-                    
-                    tarjetaContenedora.classList.add("tarjeta-pendiente")
-                    await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("tarjeta-pendiente")
-                }
+            // crear input temporal
+            let input = document.createElement("input");
+            input.classList.add("input-comentario");
+            input.value = divComentario.textContent.trim();
+
+            divComentario.replaceWith(input);
+            input.focus();
+
+            input.addEventListener("blur", async () => {
+                divComentario.textContent = input.value;
+                input.replaceWith(divComentario);
+                await manejadorDeDatos.actuales[indexDelServicio].setComentario(input.value);
+                console.log("se ha agregado el comentario " + input.value);
+            });
+        } 
+        else if (evento.target.closest("button").classList.contains("boton-tarjeta-urgent")) {
+            
+            let tarjetaContenedora = evento.target.closest(".card");
+
+            if (tarjetaContenedora.classList.contains("tarjeta-pendiente")) {
+                tarjetaContenedora.classList.remove("tarjeta-pendiente");
+                tarjetaContenedora.classList.add("tarjeta-confirmada");
+                await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("tarjeta-confirmada");
+            } 
+            else if (tarjetaContenedora.classList.contains("tarjeta-confirmada")) {
+                tarjetaContenedora.classList.remove("tarjeta-confirmada");
+                tarjetaContenedora.classList.add("tarjeta-alternativa");
+                await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("tarjeta-alternativa");
+            } 
+            else if (tarjetaContenedora.classList.contains("tarjeta-alternativa")){
+                tarjetaContenedora.classList.remove("tarjeta-alternativa");
+                await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("")
+            }
+            else {
+                tarjetaContenedora.classList.add("tarjeta-pendiente");
+                await manejadorDeDatos.actuales[indexDelServicio].setEstadoDeTarjeta("tarjeta-pendiente");
             }
         }
-        else{}
     }
-    
+    }
 }
 
 //revisar como manejar eventos con async y await para que la funcion que ejecuta el código a partir de los datos preparados no deba incluirse en ninguna de estas funciones sino que sea independiente. 

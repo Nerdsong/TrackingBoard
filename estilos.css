@@ -183,8 +183,8 @@ body{
 .card-buttons-container{
    display: flex;
    flex-direction: column;
-   justify-content: space-around;
-   margin: 4px;  
+   justify-content: flex-end;
+   margin: 1px 0px 1px 4px;  
 }
 
 .boton-tarjeta{
@@ -222,6 +222,10 @@ body{
 
 .tarjeta-confirmada{
   box-shadow: inset 0px 4px 12px 4px rgb(108, 228, 60);
+}
+
+.tarjeta-alternativa{
+  box-shadow: inset 0px 4px 12px 4px rgb(4, 176, 255);
 }
 
 .icono-tarjeta{
@@ -317,4 +321,15 @@ body{
 
   .hiden-text{
     display: none;
+  }
+
+  .card-bottom-box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .service-info{
+    flex-grow: 1;
+    font-size: 15px;
   }
