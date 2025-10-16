@@ -10,13 +10,13 @@ async function ejecutarLecturaYProcesoDeDatos(datos1,datos2){
     let matrizDatosB = await convertirDatosCSV(datos2);
 
     let matrizOrdenada = GeneradorDeServicios.odernarMatrizPorFecha(matrizDatosB);
-    let matrizValida = GeneradorDeServicios.validarMatriz(matrizOrdenada);
+    let matrizValida = GeneradorDeServicios.validarMatriz(matrizOrdenada); //BOOLEAN
     if(matrizValida){
         GeneradorDeTecnicos.leerYGenerarTecnicos(matrizDatosA);
         GeneradorTarjetasTecnicos.generarTarjetas(GeneradorDeTecnicos.tecnicosGenerados);
         GeneradorTarjetasTecnicos.mostrarTarjetasTecnicos()
 
-        GeneradorDeServicios.leerYGenerarServicios(matrizValida);
+        GeneradorDeServicios.leerYGenerarServicios(matrizOrdenada);
         await manejadorDeDatos.setNuevos(await GeneradorDeServicios.serviciosGenerados)
         await manejadorDeDatos.compararActualesYNuevos();
         //aqui entraria el manejador de matrices. 
@@ -33,3 +33,4 @@ async function ejecutarLecturaYProcesoDeDatos(datos1,datos2){
 
 
 export {ejecutarLecturaYProcesoDeDatos};
+
