@@ -9,19 +9,26 @@ async function ejecutarLecturaYProcesoDeDatos(datos1,datos2){
     let matrizDatosA = await convertirDatosCSV(datos1);
     let matrizDatosB = await convertirDatosCSV(datos2);
 
-    GeneradorDeTecnicos.leerYGenerarTecnicos(matrizDatosA);
-    GeneradorTarjetasTecnicos.generarTarjetas(GeneradorDeTecnicos.tecnicosGenerados);
-    GeneradorTarjetasTecnicos.mostrarTarjetasTecnicos()
+    let matrizOrdenada = GeneradorDeServicios.odernarMatrizPorFecha(matrizDatosB);
+    let matrizValida = GeneradorDeServicios.validarMatriz(matrizOrdenada);
+    if(matrizValida){
+        GeneradorDeTecnicos.leerYGenerarTecnicos(matrizDatosA);
+        GeneradorTarjetasTecnicos.generarTarjetas(GeneradorDeTecnicos.tecnicosGenerados);
+        GeneradorTarjetasTecnicos.mostrarTarjetasTecnicos()
 
-    GeneradorDeServicios.leerYGenerarServicios(matrizDatosB);
+        GeneradorDeServicios.leerYGenerarServicios(matrizDatosB);
+        await manejadorDeDatos.setNuevos(await GeneradorDeServicios.serviciosGenerados)
+        await manejadorDeDatos.compararActualesYNuevos();
+        //aqui entraria el manejador de matrices. 
+        // Se setean las matrices de servicios generados nuevas. 
+        // Se comparan mediante los métodos de comparacion
+        
+        GeneradorTarjetasServicios.mostrarTarjetasServiciosGeneradas(GeneradorDeTecnicos.getLegajos(),manejadorDeDatos.getActuales())
+    }
+    else{
 
-    await manejadorDeDatos.setNuevos(await GeneradorDeServicios.serviciosGenerados)
-    await manejadorDeDatos.compararActualesYNuevos();
-    //aqui entraria el manejador de matrices. 
-    // Se setean las matrices de servicios generados nuevas. 
-    // Se comparan mediante los métodos de comparacion
+    }
     
-    GeneradorTarjetasServicios.mostrarTarjetasServiciosGeneradas(GeneradorDeTecnicos.getLegajos(),manejadorDeDatos.getActuales())
 } 
 
 export {ejecutarLecturaYProcesoDeDatos};

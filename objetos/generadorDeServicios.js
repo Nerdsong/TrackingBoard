@@ -104,12 +104,37 @@ const GeneradorDeServicios = {
 
     //este methodo deberia recibir la matriz ordenada. 
 
-    leerYGenerarServicios(matrizDatos){
-
-        let matrizOrdenada = GeneradorDeServicios.odernarMatrizPorFecha(matrizDatos);
-
+    leerYGenerarServicios(matrizOrdenada){
+        
         let i = 0;
+        
+        for( i = 0 ; i < matrizOrdenada.length; i++ ){
+            GeneradorDeServicios.serviciosGenerados[i] = new Servicio ();
+            GeneradorDeServicios.serviciosGenerados[i].setLegajoServicio(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"CE Code"));
+            GeneradorDeServicios.serviciosGenerados[i].setSR(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"SR#"));
+            GeneradorDeServicios.serviciosGenerados[i].setTask(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"TASK#"));
+            GeneradorDeServicios.serviciosGenerados[i].setNombreDelSitio(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Site Name"));
+            GeneradorDeServicios.serviciosGenerados[i].setDireccion(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Address"));
+            GeneradorDeServicios.serviciosGenerados[i].setTipoDeServicio(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"SR Type"));
+            GeneradorDeServicios.serviciosGenerados[i].setSeveridad(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Severity"));
+            GeneradorDeServicios.serviciosGenerados[i].setScheduleStart(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Schedule Start"));
+            GeneradorDeServicios.serviciosGenerados[i].setRequestedBy(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Requested By"));
+            GeneradorDeServicios.serviciosGenerados[i].setStatus(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Status"));
+           GeneradorDeServicios.serviciosGenerados[i].setServiceTag(GeneradorDeServicios.buscarColumnaYDevolverValorEncontrado(matrizOrdenada,i,"Service Tag"));
+        }
+        
+    },
 
+    //este metodo ubica la columna y devuelve la informacion contenida en ella, el iterador itera cada fila. 
+
+    buscarColumnaYDevolverValorEncontrado(matriz, iterador, columnaABuscar){
+        let columnaAuxiliar =  GeneradorDeServicios.ubicarColumnaDe(columnaABuscar,matriz);
+
+            return matriz[iterador][columnaAuxiliar];
+
+    },
+
+    validarMatriz(matrizOrdenada){
         let columnName = ["CE Code","SR#","TASK#","Site Name","Address","SR Type","Severity","Schedule Start","Requested By","Status","Service Tag"]
         let columnNotFound = [];
 
@@ -126,31 +151,11 @@ const GeneradorDeServicios = {
                 columnString += column + "❌"
             })
             alert(`\n🛠️Las columnas: ${columnString} \nNo fueron encontradas en el reporte, deberás incluirlas o resetear el perfil del ECM.\n\n⚠️Si ya estaban incluidas en tu perfil, hay que ir a preferencias para editar el perfil, marcar y desmarcar uno de los territorios incluidos con "ctrl + click", luego guardar y refresh ♻️.\n\nPor error el ECM algunas veces exporta el reporte sin incluir todas las columnas☠️☠️`)
+            return false;
         }
-
-        for( i = 0 ; i < matrizOrdenada.length; i++ ){
-            GeneradorDeServicios.serviciosGenerados[i] = new Servicio ();
-            GeneradorDeServicios.serviciosGenerados[i].setLegajoServicio(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"CE Code"));
-            GeneradorDeServicios.serviciosGenerados[i].setSR(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"SR#"));
-            GeneradorDeServicios.serviciosGenerados[i].setTask(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"TASK#"));
-            GeneradorDeServicios.serviciosGenerados[i].setNombreDelSitio(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Site Name"));
-            GeneradorDeServicios.serviciosGenerados[i].setDireccion(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Address"));
-            GeneradorDeServicios.serviciosGenerados[i].setTipoDeServicio(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"SR Type"));
-            GeneradorDeServicios.serviciosGenerados[i].setSeveridad(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Severity"));
-            GeneradorDeServicios.serviciosGenerados[i].setScheduleStart(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Schedule Start"));
-            GeneradorDeServicios.serviciosGenerados[i].setRequestedBy(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Requested By"));
-            GeneradorDeServicios.serviciosGenerados[i].setStatus(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Status"));
-            GeneradorDeServicios.serviciosGenerados[i].setServiceTag(GeneradorDeServicios.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Service Tag"));
+        else{
+            return true;
         }
-    },
-
-    //este metodo verifica que la columna exista, si no existe retorna un téxto indicando que debe añadirse 
-
-    verificarSiColumnaExisteYDevolverInfo(matriz, iterador, columnaABuscar){
-        let columnaAuxiliar =  GeneradorDeServicios.ubicarColumnaDe(columnaABuscar,matriz);
-
-            return matriz[iterador][columnaAuxiliar];
-
     }
 }
 
