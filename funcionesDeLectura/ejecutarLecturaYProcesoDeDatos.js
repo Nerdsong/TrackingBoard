@@ -16,7 +16,7 @@ async function ejecutarLecturaYProcesoDeDatos(datos1,datos2){
         GeneradorTarjetasTecnicos.generarTarjetas(GeneradorDeTecnicos.tecnicosGenerados);
         GeneradorTarjetasTecnicos.mostrarTarjetasTecnicos()
 
-        GeneradorDeServicios.leerYGenerarServicios(matrizDatosB);
+        GeneradorDeServicios.leerYGenerarServicios(matrizValida);
         await manejadorDeDatos.setNuevos(await GeneradorDeServicios.serviciosGenerados)
         await manejadorDeDatos.compararActualesYNuevos();
         //aqui entraria el manejador de matrices. 
@@ -30,5 +30,6 @@ async function ejecutarLecturaYProcesoDeDatos(datos1,datos2){
     }
     
 } 
+
 
 export {ejecutarLecturaYProcesoDeDatos};
